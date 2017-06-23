@@ -12,6 +12,10 @@ var home = require('./routes/home');
 
 var app = express();
 
+
+// Connect to database
+//var db = mongoose.connect("mongodb://127.0.0.1:27017/PhotoSphere");
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -54,6 +58,7 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+  console.log(err);
 });
 
 module.exports = app;
