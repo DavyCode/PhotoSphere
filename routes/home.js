@@ -1,26 +1,31 @@
 var express = require('express'),
     router = express.Router();
-   
+
+
+
+
+ var photos = [{
+        image: "images/1.jpg",
+        caption : "hey hey feeling fly"
+    },
+    {
+        image: "images/3.jpg",
+        caption : "hey hey feeling fly"
+    },
+    {
+        image: "images/1.jpg",
+        caption : "hey hey feeling fly"
+    },
+    {
+        image: "images/3.jpg",
+        caption : "hey hey feeling fly"
+    }
+    ]; 
+
 //root route
 router.get("/", (req, res) => {
 
-    var photos = [{
-        author: "Gray Willis",
-        image: "images/1.jpg"
-    },
-    {
-        author: "Bray Willis",
-        image: "images/3.jpg"
-    },
-    {
-        author: "Gray Willis",
-        image: "images/1.jpg"
-    },
-    {
-        author: "Bray Willis",
-        image: "images/3.jpg"
-    }
-    ];
+    
     // find and display all camps in data base 
 
     
@@ -30,8 +35,16 @@ router.get("/", (req, res) => {
 
 router.post( "/", (req, res) => {
     // get data from form add to photos array
+    var photo_url = req.body.image;
+    var photo_caption = req.body.caption;
+    
+    var newPhoto ={ image : photo_url, caption: photo_caption }
+     photos.push(newPhoto);
+
+    
     //redirect back to photos home page
-    res.send('hey post hey post')
+    res.redirect('/home')
+    console.log("new photo added")
 });
 
 router.get("/new", (req, res) => {
