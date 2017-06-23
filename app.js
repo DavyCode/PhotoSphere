@@ -2,10 +2,11 @@ var express = require('express'),
     path = require('path'),
     favicon = require('serve-favicon'),
     logger = require('morgan'),
-    mongoose = require('mongoose'),
     cookieParser = require('cookie-parser'),
-    bodyParser = require('body-parser');
-
+    bodyParser = require('body-parser'),
+    mongoose = require('mongoose'),
+    mongodb = require('mongodb'),
+    Gallery = require("./models/home");
 
 
 var index = require('./routes/index');
