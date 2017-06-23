@@ -2,6 +2,7 @@ var express = require('express'),
     path = require('path'),
     favicon = require('serve-favicon'),
     logger = require('morgan'),
+    mongoose = require('mongoose'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser');
 
@@ -14,7 +15,7 @@ var app = express();
 
 
 // Connect to database
-//var db = mongoose.connect("mongodb://127.0.0.1:27017/PhotoSphere");
+var db = mongoose.connect("mongodb://127.0.0.1:27017/PhotoSphere");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
