@@ -2,8 +2,12 @@ var mongoose = require("mongoose");
 
 // Campground  schema
 var PhotoSpereSchema = mongoose.Schema({
-    image: String,
-    caption: String,
+    image:{
+        type: String
+    },
+    caption:{
+        type: String
+    }
     // author: {
     //     id:{
     //         type: mongoose.Schema.Types.ObjectId,
