@@ -7,13 +7,15 @@ var express = require('express'),
     mongoose = require('mongoose'),
     mongodb = require('mongodb'),
     Gallery = require("./models/home");
+    seedDB = require('./seeds')
+
 
 
 var index = require('./routes/index');
 var home = require('./routes/home');
 
 var app = express();
-
+seedDB(); 
 
 // Connect to database
 var db = mongoose.connect("mongodb://127.0.0.1:27017/PhotoSphere");
