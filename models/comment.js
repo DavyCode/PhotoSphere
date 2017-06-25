@@ -1,13 +1,13 @@
 var mongoose = require("mongoose");
 
 // Campground  schema
-var PhotoSpereSchema = mongoose.Schema({
-    image:{
+var commentSchema = mongoose.Schema({
+    text:{
         type: String
     },
-    caption:{
+    author:{
         type: String
-    },
+    }
     // author: {
     //     id:{
     //         type: mongoose.Schema.Types.ObjectId,
@@ -16,10 +16,10 @@ var PhotoSpereSchema = mongoose.Schema({
     //     username : String
     // }
     // ,
-    comments: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Comment"
-    }]
+    // comment: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Comment"
+    // }]
 });
 
-module.exports = mongoose.model("Gallery", PhotoSpereSchema);
+module.exports = mongoose.model("Comment", commentSchema);
