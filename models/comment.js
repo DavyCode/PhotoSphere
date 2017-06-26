@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-// Campground  schema
+// Comment  schema
 var commentSchema = mongoose.Schema({
     text:{
         type: String

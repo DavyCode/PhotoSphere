@@ -1,0 +1,37 @@
+<% include ../partials/head%>
+<% include ../partials/header%>
+
+<div class="container">
+      <div class="jumbotron">
+        <h1>PhotSphere</h1>
+        <hr class="my-4">
+        <p>My Latest web application using Node js and Express Server!!!.</p>
+        <a href="/home/new" class="btn btn-primary btn-lg">Add Your Latest Photo</a>
+      </div>
+
+      <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+            <% allPost.forEach( (data) => { %>
+                <div class="col-md-3 col-sm-6">
+                    <div class="thumbnail">
+                        <img src="<%=data.image %>">
+                        <div class="caption">
+                            <h3>
+                                <%=data.caption %>
+                            </h3>
+                        </div>
+                        <p>
+                            <a href="/home/<%= data._id%>" class="btn btn-primary">More info</a>
+                        </P>
+                    </div>
+                </div>
+                <%});%>
+        </div>  
+</div>
+
+
+
+
+
+<% include ../partials/footer%>
+<% include ../partials/foot %>
+

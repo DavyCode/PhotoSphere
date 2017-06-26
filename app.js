@@ -6,16 +6,18 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     mongodb = require('mongodb'),
-    Gallery = require("./models/home");
-    seedDB = require('./seeds')
+    Gallery = require("./models/home"),
+    app = express(),
+    seedDB = require('./seeds');
 
+seedDB(); 
 
+var Comment = require("./models/comment");
 
 var index = require('./routes/index');
 var home = require('./routes/home');
+var comment = require('./routes/comments');
 
-var app = express();
-seedDB(); 
 
 // Connect to database
 var db = mongoose.connect("mongodb://127.0.0.1:27017/PhotoSphere");
@@ -34,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/home', home);
+app.use('/home/:id/comment', comment);
 
 
 

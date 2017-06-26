@@ -1,5 +1,5 @@
-<% include partials/head%>
-<% include partials/header%>
+<% include ../partials/head%>
+<% include ../partials/header%>
 
     <div class="container">
         <div class="row">
@@ -13,16 +13,11 @@
             </div>
             <div class="col-md-9">
                 <div class="thumbnail">
-                    <img class="img-responsive" src="/<%= displayPost.image%>">
+                    <img class="img-responsive" src="/<%=displayPost.image %>">
                     <div class="caption-full">
                         <h4 class="caption">
-                           
-                                <%=displayPost.caption%>
-                            
+                           <%=displayPost.caption %>
                         </h4>
-                       
-
-                      
                     </div>
                 </div>
 
@@ -35,12 +30,22 @@
                     </div>
                     <hr>
                     
+
+                    <%  displayPost.comments.forEach(function(comment){ %>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>
+                                   <strong><%=comment.author%></strong> -- <%=comment.text%>
+                                </p>
+                               
+                            </div>
+                        </div>
+                        <% }) %>
                 </div>
             </div>
         </div>
     </div>
 
 
-
-<% include partials/foot%>
-<% include partials/footer%>
+<% include ../partials/footer%>
+<% include ../partials/foot %>

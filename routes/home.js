@@ -1,6 +1,7 @@
 var express = require('express'),
     router = express.Router(),
-    Gallery = require("../models/home");
+    Gallery = require("../models/home"),
+    Comment = require('../models/comment');
 
 
 
@@ -37,17 +38,25 @@ var express = require('express'),
 //     })
 
 
-//home route
+//HOME ROUTE
 router.get("/", (req, res) => {
   // find and display all camps in database 
    Gallery.find({}, (err, allPost) => {
        if(err){
            console.log(err)
        }
-      res.render("home", {allPost: allPost});
+      res.render("home/home", {allPost: allPost});
    }) 
 });
 
+
+//ADD NEW POST ROUTE
+router.get("/new", (req, res) => {
+    // show form for adding new photos
+    res.render("home/new")
+})
+
+//CREATE ROUTE
 router.post( "/", (req, res) => {
     // get data from form add to photos array
     //check for image field
@@ -77,27 +86,18 @@ router.post( "/", (req, res) => {
             console.log(err)
         }
         //redirect back to photo gallery page
-        res.redirect('/home');
-    })
-
-    
-    
+        res.redirect('home/home');
+    })  
 });
-
-router.get("/new", (req, res) => {
-    // show form for adding new photos
-    res.render("new")
-})
 
 
 //SHOW PAGE
 router.get("/:id", function(req, res) {
     //find campground with provided id
-    Gallery.findById(req.params.id).exec( (err, foundPost) => {
-        (err) ? console.log(err):
-            res.render("show", { displayPost: foundPost });
+    Gallery.findById(req.params.id).populate("comments").exec((err, foundPost) => {
+        (err)? console.log(err):
+            res.render("home/show", { displayPost: foundPost });
     });
 });
-
 
 module.exports = router;

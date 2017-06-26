@@ -3,7 +3,6 @@ var Gallery = require('./models/home');
 var Comment = require('./models/comment');
 
 
-
  var post = [{
         image: "images/1.jpg",
         caption : "hey hey feeling fly"
@@ -59,20 +58,19 @@ function seedDB(){
               {
                  text: "waooooooo!!!! comment finally",
                  author : "john thomas"
-            }, (err, comment) => {
-              if(err){
-                console.log(err);
-              }
-               newPost.comments.push(comment)
-               newPost.save();
-               console.log('New comment added');
+              }, 
+                (err, comment) => {
+                 if(err){
+                  console.log(err);
+                 }
+                  newPost.comments.push(comment);
+                  newPost.save();
+                  console.log('New comment added');
             })
         });
 });
 });
-
 }
-
 
 
 module.exports = seedDB;
