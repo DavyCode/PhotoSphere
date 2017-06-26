@@ -10,7 +10,10 @@
             <div style="width:30%; margin:25px auto;">
                 <form action="/home/<%= foundPost._id %>/comment" method="POST">
                     <div class="form-group">
-                        <input class="form-control" type="text" name="comment[text]" placeholder="text">
+                        <input class="form-control" type="text" name="comment" placeholder="text">
+                    </div>
+                     <div class="form-group">
+                        <input class="form-control" type="text" name="author" placeholder="author">
                     </div>
                 
                     <div class="form-group">

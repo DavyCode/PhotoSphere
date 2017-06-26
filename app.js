@@ -1,14 +1,16 @@
 var express = require('express'),
+    bodyParser = require('body-parser'),
+    mongoose = require('mongoose'),
+    Gallery = require("./models/home"),
     path = require('path'),
     favicon = require('serve-favicon'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
-    bodyParser = require('body-parser'),
-    mongoose = require('mongoose'),
     mongodb = require('mongodb'),
-    Gallery = require("./models/home"),
     app = express(),
     seedDB = require('./seeds');
+
+
 
 seedDB(); 
 
