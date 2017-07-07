@@ -3,10 +3,13 @@ var express = require('express'),
     mongoose = require('mongoose'),
     Gallery = require("./models/home"),
     path = require('path'),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local'),
     favicon = require('serve-favicon'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     mongodb = require('mongodb'),
+    User = require('./models/user'),
     app = express(),
     seedDB = require('./seeds');
 
@@ -27,6 +30,26 @@ var db = mongoose.connect("mongodb://127.0.0.1:27017/PhotoSphere");
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+
+
+// ==========
+// PASSPORT CONFIG
+// ==============================
+app.use(require('express-session')({
+    secret: "passport working magic",
+    resave: false,
+    saveUninitialized: false
+}));
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
