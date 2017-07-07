@@ -7,7 +7,7 @@
                 <h3>PhotoSphere</h3>
                 <div>
                     <li class="list-group-item active">info 1</li>
-                    <li class="list-group-item"><a href="">Author here</a></li>
+                    <li class="list-group-item"><a href=""><i class="fa fa-user" aria-hidden="true"  ></i> Author here</a></li>
                     <li class="list-group-item">Posted 4 days ago</li>
                 </div>
             </div>
@@ -25,8 +25,8 @@
                 <div class="well">
                     
                     <div class="text-right">
-                        <a class="btn btn-xs btn-success" href="#">Like <i>Like icon</i></a>
-                        <a class="btn btn-xs btn-success" href="/home/<%=displayPost._id%>/comment/new">Comment</a>
+                        <a class="btn btn-xs btn-success" href="#">Like <i class="fa fa-thumbs-up" aria-hidden="true"  ></i></a>
+                        <a class="btn btn-xs btn-success" href="/home/<%=displayPost._id%>/comment/new">Comment <i class="fa fa-plus" ></i></a>
                     </div>
                     <hr>
                     
@@ -34,8 +34,10 @@
                     <%  displayPost.comments.forEach(function(comment){ %>
                         <div class="row">
                             <div class="col-md-12">
+                                 <strong><%=comment.author%></strong>
+                                 <span class="pull-right">10 days ago</span>
                                 <p>
-                                   <strong><%=comment.author%></strong> -- <%=comment.text%>
+                                    <%=comment.text%>
                                 </p>
                                
                             </div>
