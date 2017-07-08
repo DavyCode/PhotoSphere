@@ -33,6 +33,18 @@ router.post('/register', (req, res) => {
     })
 })
 
+//Show login form
+router.get('/register', (req, res) => {
+    res.render('users/login');
+});
+
+//handle login logic
+router.post('/login', passport.authenticate('local', 
+    {
+        successRedirect: '/home',
+        failureRedirect: '/login'
+    }), (req, res) => {
+});
 
 
 module.exports = router;
