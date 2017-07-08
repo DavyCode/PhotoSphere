@@ -15,7 +15,7 @@ var express = require('express'),
 
 
 
-seedDB(); 
+// seedDB(); Seed database
 
 var Comment = require("./models/comment");
 

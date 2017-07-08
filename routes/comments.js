@@ -30,7 +30,7 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
                     },
                         createdAt: Date.now()
                     }
-            Comment.create(newComment, (err, comment) => {
+                Comment.create(newComment, (err, comment) => {
                 if (err) {
                     // req.flash("error", "Something Went Wrong");
                     console.log(err);
