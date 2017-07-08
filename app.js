@@ -4,6 +4,7 @@ var express = require('express'),
     Gallery = require("./models/home"),
     path = require('path'),
     passport = require('passport'),
+    methodOverride = require('method-override'),
     LocalStrategy = require('passport-local'),
     favicon = require('serve-favicon'),
     logger = require('morgan'),
@@ -57,6 +58,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride("_method"));
 
 
 // middleware

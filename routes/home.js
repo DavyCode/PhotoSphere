@@ -74,4 +74,17 @@ router.get("/:id", function(req, res) {
     });
 });
 
+//Edit post
+router.get('/:id/edit', (req, res) => {
+    Gallery.findById(req.params.id, (err, postFound) => {
+        if(err){
+            console.log(err.message);
+        }
+        res.render('home/edit', {editedPost : postFound})
+    })
+})
+//Update post
+
+//Delete post
+
 module.exports = router;
