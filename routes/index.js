@@ -26,6 +26,7 @@ router.post('/register', (req, res) => {
             console.log(err.message);
              return res.render('users/register');
         }
+        // middleware authenticate and log user in
         passport.authenticate('local')(req, res, () => {
             res.redirect('home');
             console.log("user registered!!!")
@@ -34,7 +35,7 @@ router.post('/register', (req, res) => {
 })
 
 //Show login form
-router.get('/register', (req, res) => {
+router.get('/login', (req, res) => {
     res.render('users/login');
 });
 
