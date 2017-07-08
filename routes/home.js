@@ -41,6 +41,7 @@ var express = require('express'),
 
 //HOME ROUTE
 router.get("/", (req, res) => {
+    console.log(req.user)
   // find and display all camps in database 
    Gallery.find({}, (err, allPost) => {
        if(err){
@@ -80,8 +81,11 @@ router.post( "/", middleware.isLoggedIn, (req, res) => {
 
     var photo_url = req.body.image;
     var photo_caption = req.body.caption;
-    var newPost ={ image : photo_url, caption: photo_caption }
-
+    var author = {
+        id: req.user._id,
+        username: req.user.username
+    }
+    var newPost ={ image : photo_url, caption: photo_caption, author : author }
     Gallery.create(newPost, (err, newlyPosted) => {
         if(err){
             console.log(err.message)
@@ -97,9 +101,6 @@ router.get("/:id", function(req, res) {
     //find campground with provided id
     Gallery.findById(req.params.id).populate("comments").exec((err, foundPost) => {
         (err)? console.log(err):
-        // console.log(foundPost)
-        // console.log(foundPost.author)
-        // console.log(foundPost.author.username)
             res.render("home/show", { displayPost: foundPost });
     });
 });
