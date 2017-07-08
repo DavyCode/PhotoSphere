@@ -13,7 +13,7 @@ router.get('/new', middleware.isLoggedIn, (req, res) => {
 });   
 
 
-
+// Comment Create
 router.post('/', middleware.isLoggedIn, (req, res) => {
      //lookup campground using ID
     Gallery.findById(req.params.id, (err, foundPost) => {
@@ -49,6 +49,43 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
             })
         }
     });
+})
+
+
+
+
+//Edit post
+router.get('/:comment_id/edit', middleware.checkCommentOwnership, (req, res) => {
+    Gallery.findById(req.params.comment_id, (err, commentFound) => {
+        if(err){
+            console.log(err.message);
+        }
+        res.render('comment/edit', {comment : commentFound, post_id: req.params.id})
+    })
+})
+//Update post
+router.put('/:id', middleware.checkPostOwnership, (req, res) => {
+     const editedPost = {
+         image : req.body.image,
+         caption : req.body.caption
+     }
+     Gallery.findByIdAndUpdate(req.params.id, editedPost, (err, updatedPost) => {
+         if(err) {
+             console.log(err.message)
+             res.redirect('/home')
+         }
+         res.redirect('/home/' + req.params.id);
+     } )
+})
+
+//Delete post
+router.delete('/:id', middleware.checkPostOwnership, (req, res) => {
+    Gallery.findByIdAndRemove( req.params.id, (err) => {
+        if(err){
+            res.redirect('/home')
+        }
+        res.redirect('/home')
+    })
 })
 
 

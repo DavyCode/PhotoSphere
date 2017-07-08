@@ -107,4 +107,6 @@ router.delete('/:id', middleware.checkPostOwnership, (req, res) => {
         res.redirect('/home')
     })
 })
+
+
 module.exports = router;

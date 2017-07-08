@@ -18,11 +18,16 @@
                         <h4 class="caption">
                            <%=displayPost.caption %>
                         </h4>
+
+                        <% if(currentUser && displayPost.author.id.equals(currentUser._id)){%>
+                        <!--Edit button-->
                         <a id="edit-btn" class="btn btn-xs btn-warning" href="/home/<%= displayPost._id %>/edit">Edit post</a>
+                        <!--delete form-->
                         <form id="del-btn" action="/home/<%=displayPost._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-xs btn-danger" >Delete post</button>
                         </form>
-                        </div>
+                        <% }%>
+                    </div>
                 </div>
 
                 <!--Comment section-->
