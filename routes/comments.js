@@ -3,7 +3,7 @@ var express = require('express'),
     Gallery = require("../models/home"),
     Comment = require("../models/comment"),
     middleware = require('../middleware');
-    // middleware = require('../middleware');
+
 
 // NEW COMMENT
 router.get('/new', middleware.isLoggedIn, (req, res) => {

@@ -6,39 +6,6 @@ var express = require('express'),
 
 
 
-
-//  var photos = [{
-//         image: "images/1.jpg",
-//         caption : "hey hey feeling fly"
-//     },
-//     {
-//         image: "images/3.jpg",
-//         caption : "hey hey feeling fly"
-//     },
-//     {
-//         image: "images/1.jpg",
-//         caption : "hey hey feeling fly"
-//     },
-//     {
-//         image: "images/3.jpg",
-//         caption : "hey hey feeling fly"
-//     }
-//     ]; 
-
-// Gallery.create( {
-        
-//         image: "images/1.jpg",
-//         caption : "hahaha dot create did this!!"
-    
-//     }, (err, newPost) => {
-//         if(err){
-//             console.log(err);
-//         }
-//         console.log("new photo posted!!");
-//         console.log(newPost);
-//     })
-
-
 //HOME ROUTE
 router.get("/", (req, res) => {
     console.log(req.user)
@@ -78,15 +45,6 @@ router.post( "/", middleware.isLoggedIn, (req, res) => {
     // }
 
 
-
-    // var photo_url = req.body.image;
-    // var photo_caption = req.body.caption;
-    // var author = {
-    //     id: req.user._id,
-    //     username: req.user.username
-    // };
-    // var postDate = createdAt 
-    // var newPost ={ image : photo_url, caption: photo_caption, author : author };
 // ------------------------------------------
     const newPost ={
         image: req.body.image,

@@ -58,6 +58,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// middleware
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    // res.locals.error = req.flash('error');
+    // res.locals.success = req.flash('success');
+    next();
+});
+
 app.use('/', index);
 app.use('/home', home);
 app.use('/home/:id/comment', comment);

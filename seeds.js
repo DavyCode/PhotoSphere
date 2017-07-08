@@ -42,33 +42,33 @@ var Comment = require('./models/comment');
 
 function seedDB(){
     Gallery.remove({}, (err) => {
-    if(err){
-      console.log(err);
-    }
-    console.log("removed all post!!!!");
+//     if(err){
+//       console.log(err);
+//     }
+//     console.log("removed all post!!!!");
     
-    post.forEach( (item) => {
-        Gallery.create(item, (err, newPost) => {
-            if(err){
-                console.log(err);
-            }
-            console.log("new post posted!!");
-            //Create Comment
-            Comment.create(
-              {
-                 text: "waooooooo!!!! comment finally",
-                 author : "john thomas"
-              }, 
-                (err, comment) => {
-                 if(err){
-                  console.log(err);
-                 }
-                  newPost.comments.push(comment);
-                  newPost.save();
-                  console.log('New comment added');
-            })
-        });
-});
+//     post.forEach( (item) => {
+//         Gallery.create(item, (err, newPost) => {
+//             if(err){
+//                 console.log(err);
+//             }
+//             console.log("new post posted!!");
+//             //Create Comment
+//             Comment.create(
+//               {
+//                  text: "waooooooo!!!! comment finally",
+//                  author : "john thomas"
+//               }, 
+//                 (err, comment) => {
+//                  if(err){
+//                   console.log(err);
+//                  }
+//                   newPost.comments.push(comment);
+//                   newPost.save();
+//                   console.log('New comment added');
+//             })
+//         });
+// });
 });
 }
 
