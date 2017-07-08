@@ -47,7 +47,7 @@ router.get("/", (req, res) => {
        if(err){
            console.log(err)
        }
-      res.render("home/home", {allPost: allPost});
+      res.render("home/home", {allPost: allPost, currentUser : req.user});
    }) 
 });
 
@@ -79,16 +79,27 @@ router.post( "/", middleware.isLoggedIn, (req, res) => {
 
 
 
-    var photo_url = req.body.image;
-    var photo_caption = req.body.caption;
-    var author = {
+    // var photo_url = req.body.image;
+    // var photo_caption = req.body.caption;
+    // var author = {
+    //     id: req.user._id,
+    //     username: req.user.username
+    // };
+    // var postDate = createdAt 
+    // var newPost ={ image : photo_url, caption: photo_caption, author : author };
+// ------------------------------------------
+    const newPost ={
+        image: req.body.image,
+        caption: req.body.caption,
+        author : {
         id: req.user._id,
         username: req.user.username
+    },
+        createdAt: Date.now()
     }
-    var newPost ={ image : photo_url, caption: photo_caption, author : author }
     Gallery.create(newPost, (err, newlyPosted) => {
         if(err){
-            console.log(err.message)
+            console.log(err.message);
         }
         //redirect back to photo gallery page
         res.redirect('/home');

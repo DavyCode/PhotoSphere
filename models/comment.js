@@ -5,17 +5,21 @@ var commentSchema = mongoose.Schema({
     text:{
         type: String
     },
-    author:{
-        type: String
-    }
-    // author: {
-    //     id:{
-    //         type: mongoose.Schema.Types.ObjectId,
-    //         ref: "User"
-    //     },
-    //     username : String
+    // author:{
+    //     type: String
     // }
-    // ,
+    author: {
+        id:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username : String
+    },
+    createdAt:{
+        type: Date,
+        default: Date.now
+    },
+    
     // comment: [{
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: "Comment"

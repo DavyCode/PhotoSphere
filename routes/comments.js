@@ -22,8 +22,14 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
             res.redirect("home/home");
         } else {
             var text = req.body.comment;
-            var author = req.body.author;
-          var newComment = { text: text, author: author };
+             const newComment ={
+                        text: req.body.comment,
+                        author : {
+                        id: req.user._id,
+                        username: req.user.username
+                    },
+                        createdAt: Date.now()
+                    }
             Comment.create(newComment, (err, comment) => {
                 if (err) {
                     // req.flash("error", "Something Went Wrong");
@@ -35,7 +41,6 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
 
                     //save comment
                     comment.save();
-                    console.log(comment +"the comment body")
                     foundPost.comments.push(comment);
                     foundPost.save();
                     // req.flash("success", "Successfully Added Comment");
