@@ -1,12 +1,12 @@
 var express = require('express'),
      router = express.Router({ mergeParams: true }),
-    // router = express.Router(),
     Gallery = require("../models/home"),
-    Comment = require("../models/comment");
+    Comment = require("../models/comment"),
+    middleware = require('../middleware');
     // middleware = require('../middleware');
 
 // NEW COMMENT
-router.get('/new', (req, res) => {
+router.get('/new', middleware.isLoggedIn, (req, res) => {
    Gallery.findById(req.params.id, (err, foundPost) => {
         (err) ? console.log(err): res.render("comments/new", { foundPost: foundPost });
     });
@@ -14,7 +14,7 @@ router.get('/new', (req, res) => {
 
 
 
-router.post('/', (req, res) => {
+router.post('/', middleware.isLoggedIn, (req, res) => {
      //lookup campground using ID
     Gallery.findById(req.params.id, (err, foundPost) => {
         if (err) {
@@ -23,10 +23,8 @@ router.post('/', (req, res) => {
         } else {
             var text = req.body.comment;
             var author = req.body.author;
-            console.log(text + author);
           var newComment = { text: text, author: author };
             Comment.create(newComment, (err, comment) => {
-              console.log(newComment +"the comment body")
                 if (err) {
                     // req.flash("error", "Something Went Wrong");
                     console.log(err);

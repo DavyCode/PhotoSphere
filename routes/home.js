@@ -1,7 +1,8 @@
 var express = require('express'),
     router = express.Router(),
     Gallery = require("../models/home"),
-    Comment = require('../models/comment');
+    Comment = require('../models/comment'),
+    middleware = require('../middleware');
 
 
 
@@ -51,13 +52,13 @@ router.get("/", (req, res) => {
 
 
 //ADD NEW POST ROUTE
-router.get("/new", (req, res) => {
+router.get("/new", middleware.isLoggedIn, (req, res) => {
     // show form for adding new photos
     res.render("home/new")
 })
 
 //CREATE ROUTE
-router.post( "/", (req, res) => {
+router.post( "/", middleware.isLoggedIn, (req, res) => {
     // get data from form add to photos array
     //check for image field
     // if (req.files.image) {
@@ -83,10 +84,10 @@ router.post( "/", (req, res) => {
 
     Gallery.create(newPost, (err, newlyPosted) => {
         if(err){
-            console.log(err)
+            console.log(err.message)
         }
         //redirect back to photo gallery page
-        res.redirect('home/home');
+        res.redirect('/home');
     })  
 });
 
@@ -96,6 +97,9 @@ router.get("/:id", function(req, res) {
     //find campground with provided id
     Gallery.findById(req.params.id).populate("comments").exec((err, foundPost) => {
         (err)? console.log(err):
+        // console.log(foundPost)
+        // console.log(foundPost.author)
+        // console.log(foundPost.author.username)
             res.render("home/show", { displayPost: foundPost });
     });
 });
