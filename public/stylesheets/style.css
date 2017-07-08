@@ -159,5 +159,8 @@ footer {
 }*/
 
 #edit-btn {
-   padding:10px;
+   margin:10px;
+}
+#del-btn{
+    display: inline;
 }

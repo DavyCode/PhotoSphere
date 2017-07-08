@@ -18,10 +18,10 @@
                         <h4 class="caption">
                            <%=displayPost.caption %>
                         </h4>
-                        <div id="edit-btn">
-                             <a class="btn btn-xs btn-warning" href="/home/<%= displayPost._id%>/edit">Edit post</a>
-                    
-                        </div>
+                        <a id="edit-btn" class="btn btn-xs btn-warning" href="/home/<%= displayPost._id %>/edit">Edit post</a>
+                        <form id="del-btn" action="/home/<%=displayPost._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-xs btn-danger" >Delete post</button>
+                        </form>
                         </div>
                 </div>
 

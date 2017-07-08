@@ -75,7 +75,7 @@ router.get("/:id", function(req, res) {
 });
 
 //Edit post
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', middleware.checkPostOwnership, (req, res) => {
     Gallery.findById(req.params.id, (err, postFound) => {
         if(err){
             console.log(err.message);
@@ -84,7 +84,7 @@ router.get('/:id/edit', (req, res) => {
     })
 })
 //Update post
-router.put('/:id', (req, res) => {
+router.put('/:id', middleware.checkPostOwnership, (req, res) => {
      const editedPost = {
          image : req.body.image,
          caption : req.body.caption
@@ -97,6 +97,14 @@ router.put('/:id', (req, res) => {
          res.redirect('/home/' + req.params.id);
      } )
 })
-//Delete post
 
+//Delete post
+router.delete('/:id', middleware.checkPostOwnership, (req, res) => {
+    Gallery.findByIdAndRemove( req.params.id, (err) => {
+        if(err){
+            res.redirect('/home')
+        }
+        res.redirect('/home')
+    })
+})
 module.exports = router;
