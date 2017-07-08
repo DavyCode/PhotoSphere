@@ -25,3 +25,16 @@ var PhotoSpereSchema = mongoose.Schema({
 });
 
 module.exports = mongoose.model("Gallery", PhotoSpereSchema);
+
+
+// // Day Schema
+// var daySchema = mongoose.Schema({
+//   name:{
+//     type: String,
+//     required: true,
+//   },
+//   createdAt:{
+//     type: Date,
+//     default: Date.now
+//   }
+// });

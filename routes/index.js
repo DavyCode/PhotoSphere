@@ -13,8 +13,26 @@ router.get('/', function(req, res, next) {
 // Auth Routes
 // ====================
 
+//Show sign up form
 router.get('/register', (req, res) => {
     res.render('users/register');
 });
+
+// Handle sign up logic
+router.post('/register', (req, res) => {
+    var newUser = new User({username : req.body.username});
+    User.register( newUser, req.body.password,  (err, user) => {
+        if(err){
+            console.log(err.message);
+             return res.render('users/register');
+        }
+        passport.authenticate('local')(req, res, () => {
+            res.redirect('home');
+            console.log("user registered!!!")
+        });
+    })
+})
+
+
 
 module.exports = router;
