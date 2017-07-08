@@ -80,11 +80,23 @@ router.get('/:id/edit', (req, res) => {
         if(err){
             console.log(err.message);
         }
-        res.render('home/edit', {editedPost : postFound})
+        res.render('home/edit', {editPost : postFound})
     })
 })
 //Update post
-
+router.put('/:id', (req, res) => {
+     const editedPost = {
+         image : req.body.image,
+         caption : req.body.caption
+     }
+     Gallery.findByIdAndUpdate(req.params.id, editedPost, (err, updatedPost) => {
+         if(err) {
+             console.log(err.message)
+             res.redirect('/home')
+         }
+         res.redirect('/home/' + req.params.id);
+     } )
+})
 //Delete post
 
 module.exports = router;
