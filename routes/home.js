@@ -60,6 +60,7 @@ router.post( "/", middleware.isLoggedIn, (req, res) => {
             console.log(err.message);
         }
         //redirect back to photo gallery page
+        req.flash("success", "New post added")
         res.redirect('/home');
     })  
 });
@@ -94,6 +95,7 @@ router.put('/:id', middleware.checkPostOwnership, (req, res) => {
              console.log(err.message)
              res.redirect('/home')
          }
+         req.flash("success", "Ooh Yeah post updated")
          res.redirect('/home/' + req.params.id);
      } )
 })
@@ -104,6 +106,7 @@ router.delete('/:id', middleware.checkPostOwnership, (req, res) => {
         if(err){
             res.redirect('/home')
         }
+        req.flash("success", "Ooh No post deleted")
         res.redirect('/home')
     })
 })

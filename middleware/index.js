@@ -10,6 +10,7 @@ middlewareObj.isLoggedIn = (req, res, next) => {
     if (req.isAuthenticated()){
         return next();
     }
+    req.flash('error', 'Please login first!');
     res.redirect('/login');
 }
 
@@ -18,6 +19,7 @@ middlewareObj.checkPostOwnership = (req, res, next) => {
     if(req.isAuthenticated()){
        Gallery.findById(req.params.id, (err, foundPost) => {
          if(err){
+             req.flash("error", "No post Found");
              res.redirect('back')
          }else{
              //does user own the campground?
@@ -25,11 +27,13 @@ middlewareObj.checkPostOwnership = (req, res, next) => {
                  next();
 
              }else{
+                 req.flash("error", "You do not have the permission");
                  res.redirect('back');
              }
          }
        })
     }else {
+       req.flash("error", "You need to be logged in"); 
        res.redirect('back');
     }
 }
@@ -46,11 +50,13 @@ middlewareObj.checkCommentOwnership = (req, res, next) => {
                  next();
 
              }else{
+                 req.flash("error", "You dont have permission to do that");
                  res.redirect('back');
              }
          }
        })
     }else {
+       req.flash("error", 'You must be logged in to edit this post');
        res.redirect('back');
     }
 }

@@ -23,13 +23,13 @@ router.post('/register', (req, res) => {
     var newUser = new User({username : req.body.username});
     User.register( newUser, req.body.password,  (err, user) => {
         if(err){
-            console.log(err.message);
+             req.flash('error', err.message);
              return res.render('users/register');
         }
         // middleware authenticate and log user in
         passport.authenticate('local')(req, res, () => {
-            res.redirect('home');
-            console.log("user registered!!!")
+            req.flash("success", "Ooh Yeah welcome onboard" + " " + user.username, " begin posting your favorite photos")
+            res.redirect('/home');
         });
     })
 })

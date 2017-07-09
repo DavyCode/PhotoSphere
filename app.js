@@ -6,6 +6,7 @@ var express = require('express'),
     passport = require('passport'),
     methodOverride = require('method-override'),
     LocalStrategy = require('passport-local'),
+    flash = require('connect-flash'),
     favicon = require('serve-favicon'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
@@ -45,6 +46,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride("_method"));
+app.use(flash());
 
 
 
@@ -68,8 +70,8 @@ passport.deserializeUser(User.deserializeUser());
 // middleware
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
-    // res.locals.error = req.flash('error');
-    // res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    res.locals.success = req.flash('success');
     next();
 });
 
