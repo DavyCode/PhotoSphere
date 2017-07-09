@@ -11,6 +11,7 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     mongodb = require('mongodb'),
     User = require('./models/user'),
+
     app = express(),
     seedDB = require('./seeds');
 
@@ -34,6 +35,19 @@ app.set('view engine', 'ejs');
 
 
 
+
+
+// uncomment after placing your favicon in /public
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride("_method"));
+
+
+
 // ==========
 // PASSPORT CONFIG
 // ==============================
@@ -49,16 +63,6 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
-
-// uncomment after placing your favicon in /public
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(methodOverride("_method"));
 
 
 // middleware

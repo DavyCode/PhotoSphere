@@ -21,14 +21,14 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
             console.log(err);
             res.redirect("home/home");
         } else {
-            var text = req.body.comment;
-             const newComment ={
-                        text: req.body.comment,
-                        author : {
-                        id: req.user._id,
-                        username: req.user.username
-                    },
-                        createdAt: Date.now()
+             var text = req.body.comment;
+             var newComment ={
+                        text: req.body.comment
+                    //     author : {
+                    //     id:  req.user._id,
+                    //     username: req.user.username
+                    // },
+                    //     createdAt: Date.now()
                     }
                 Comment.create(newComment, (err, comment) => {
                 if (err) {
@@ -36,8 +36,9 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
                     console.log(err);
                 } else {
                     //add username and id to comment
-                    // comment.author.id = req.user._id;
-                    // comment.author.username = req.user.username;
+                     comment.author.id = req.user._id;
+                     comment.author.username = req.user.username;
+                     comment.createdAt = Date.now();
 
                     //save comment
                     comment.save();
@@ -54,39 +55,42 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
 
 
 
-//Edit post
+//Comment edit route
 router.get('/:comment_id/edit', middleware.checkCommentOwnership, (req, res) => {
-    Gallery.findById(req.params.comment_id, (err, commentFound) => {
+    Comment.findById(req.params.comment_id, (err, commentFound) => {
         if(err){
-            console.log(err.message);
+             res.redirect('back');
         }
-        res.render('comment/edit', {comment : commentFound, post_id: req.params.id})
+        console.log(req.params.id);
+        console.log(req.params.comment_id)
+        console.log(commentFound)
+        res.render('comments/edit', { post_id: req.params.id, comment : commentFound})
     })
-})
-//Update post
-router.put('/:id', middleware.checkPostOwnership, (req, res) => {
-     const editedPost = {
-         image : req.body.image,
-         caption : req.body.caption
-     }
-     Gallery.findByIdAndUpdate(req.params.id, editedPost, (err, updatedPost) => {
-         if(err) {
-             console.log(err.message)
-             res.redirect('/home')
-         }
-         res.redirect('/home/' + req.params.id);
-     } )
 })
 
+
+//Comment Update route
+router.put('/:comment_id', middleware.checkCommentOwnership, (req, res) => {
+     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, updatedComment) => {
+         if(err) {
+             res.redirect('back')
+         }
+         console.log(req.params.comment_id)
+         console.log(req.params.id);
+         console.log(req.body.comment);
+         res.redirect('/home/' + req.params.id);
+     } );
+});
+
 //Delete post
-router.delete('/:id', middleware.checkPostOwnership, (req, res) => {
-    Gallery.findByIdAndRemove( req.params.id, (err) => {
+router.delete('/:comment_id', middleware.checkCommentOwnership, (req, res) => {
+    Comment.findByIdAndRemove( req.params.comment_id, (err) => {
         if(err){
-            res.redirect('/home')
+            res.redirect('back')
         }
-        res.redirect('/home')
-    })
-})
+        res.redirect('/home/' + req.params.id)
+    });
+});
 
 
 

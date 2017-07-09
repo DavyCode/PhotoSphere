@@ -2,9 +2,7 @@ var mongoose = require("mongoose");
 
 // Comment  schema
 var commentSchema = mongoose.Schema({
-    text:{
-        type: String
-    },
+    text:String,
     author: {
         id:{
             type: mongoose.Schema.Types.ObjectId,
@@ -15,12 +13,7 @@ var commentSchema = mongoose.Schema({
     createdAt:{
         type: Date,
         default: Date.now
-    },
-    
-    // comment: [{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Comment"
-    // }]
+    }
 });
 
 module.exports = mongoose.model("Comment", commentSchema);

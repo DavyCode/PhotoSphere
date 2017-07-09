@@ -46,12 +46,19 @@
                                  <strong><%=comment.author.username%></strong>
                                  <span class="pull-right"><%=comment.createdAt %></span>
                                 <p>
-                                    <%=comment.text%>
+                                    <%-comment.text%>
                                 </p>
-                               
+                               <% if(currentUser && comment.author.id.equals(currentUser._id)){%>
+                                    <!--Edit button-->
+                                    <a id="edit-btnn" class="btn btn-xs btn-warning" href="/home/<%= displayPost._id %>/comment/<%=comment._id %>/edit">edit comment</a>
+                                    <!--delete form-->
+                                    <form id="del-btn" action="/home/<%=displayPost._id %>/comment/<%=comment._id %>?_method=DELETE" method="POST">
+                                        <button class="btn btn-xs btn-danger" >delete comment</button>
+                                    </form>
+                                <% }%>
                             </div>
                         </div>
-                        <% }) %>
+                    <% }) %>
                 </div>
             </div>
         </div>
