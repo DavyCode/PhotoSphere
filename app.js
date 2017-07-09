@@ -1,4 +1,4 @@
-var express = require('express'),
+const express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     Gallery = require("./models/home"),
@@ -20,15 +20,15 @@ var express = require('express'),
 
 // seedDB(); Seed database
 
-var Comment = require("./models/comment");
+const Comment = require("./models/comment");
 
-var index = require('./routes/index');
-var home = require('./routes/home');
-var comment = require('./routes/comments');
+const index = require('./routes/index');
+const home = require('./routes/home');
+const comment = require('./routes/comments');
 
 
 // Connect to database
-var db = mongoose.connect("mongodb://127.0.0.1:27017/PhotoSphere");
+const db = mongoose.connect("mongodb://127.0.0.1:27017/PhotoSphere");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -92,7 +92,7 @@ app.use('/home/:id/comment', comment);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
-//   var err = new Error('Not Found');
+//   const err = new Error('Not Found');
 //   err.status = 404;
 //   next(err);
 // });
