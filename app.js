@@ -22,6 +22,7 @@ const express = require('express'),
 
 const Comment = require("./models/comment");
 
+//Require routes
 const index = require('./routes/index');
 const home = require('./routes/home');
 const comment = require('./routes/comments');
