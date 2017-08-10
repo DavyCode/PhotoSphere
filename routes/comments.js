@@ -1,5 +1,5 @@
 var express = require('express'),
-     router = express.Router({ mergeParams: true }),
+    router = express.Router({ mergeParams: true }),
     Gallery = require("../models/home"),
     Comment = require("../models/comment"),
     middleware = require('../middleware');
